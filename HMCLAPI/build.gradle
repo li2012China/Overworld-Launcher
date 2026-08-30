@@ -1,0 +1,6 @@
+/*
+ * Hello Minecraft! Launcher - HMCLAPI module
+ */
+plugins {
+    id 'java'
+}

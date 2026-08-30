@@ -1,0 +1,45 @@
+/*
+ * Hello Minecraft! Launcher - Main module build.gradle
+ * Minimal version for compile test (Gradle 8.5 + Java 21)
+ * Full build config kept in build.gradle.full
+ */
+import java.util.jar.JarFile
+import java.security.MessageDigest
+
+plugins {
+    id 'java'
+}
+
+if (!hasProperty('mainClass')) {
+    ext.mainClass = 'org.jackhuang.hmcl.Main'
+}
+
+def buildnumber = System.getenv("TRAVIS_BUILD_NUMBER") ?: System.getenv("BUILD_NUMBER") ?: "60"
+def versionroot = System.getenv("VERSION_ROOT") ?: "2.7.10"
+
+group = 'HMCL'
+version = versionroot + '.' + buildnumber
+
+configurations {
+    coreCompile.extendsFrom compile
+    coreRuntime.extendsFrom runtime
+}
+
+dependencies {
+    implementation project(':HMCLaF')
+    implementation project(':HMCLAPI')
+    implementation project(':HMCLCore')
+    implementation 'com.google.code.gson:gson:2.2.4'
+    implementation 'org.commonjava.googlecode.markdown4j:markdown4j:2.2-cj-1.0'
+}
+
+jar {
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+
+    manifest {
+        attributes(
+            'Created-By': 'Copyright(c) 2013-2017 huangyuhui.',
+            'Main-Class': mainClass
+        )
+    }
+}

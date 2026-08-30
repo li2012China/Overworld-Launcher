@@ -1,0 +1,44 @@
+/*
+ * Minimal root build.gradle for compile test
+ * Upgraded from Gradle 4.3 to 8.5 for Java 21 compatibility
+ */
+apply plugin: 'base'
+
+subprojects {
+    apply plugin: 'java'
+    repositories {
+        mavenCentral()
+    }
+
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+    // Support legacy 'compile' configuration
+    configurations.all {
+        if (name == 'compile') { transitive = true }
+    }
+}
+
+subprojects { sub ->
+    // HMCLCore dependencies
+    if (sub.name == 'HMCLCore') {
+        sub.dependencies {
+            implementation project(':HMCLAPI')
+            implementation 'com.google.code.gson:gson:2.2.4'
+            implementation 'org.commonjava.googlecode.markdown4j:markdown4j:2.2-cj-1.0'
+        }
+    }
+    // HMCLaF
+    if (sub.name == 'HMCLaF') {
+        sub.dependencies {
+            implementation project(':HMCLCore')
+        }
+    }
+    // HMCL main
+    if (sub.name == 'HMCL') {
+        sub.dependencies {
+            implementation project(':HMCLaF')
+            implementation project(':HMCLAPI')
+            implementation project(':HMCLCore')
+        }
+    }
+}
