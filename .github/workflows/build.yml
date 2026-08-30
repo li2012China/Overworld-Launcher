@@ -21,7 +21,9 @@ jobs:
           distribution: temurin
 
       - name: Build
-        run: ./gradlew assemble -x test
+        run: |
+          chmod +x ./gradlew
+          ./gradlew assemble -x test
 
       - name: Upload HMCL jar
         if: success()
