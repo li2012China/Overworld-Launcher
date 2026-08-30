@@ -28,12 +28,18 @@ jobs:
       - name: Build (JAR + EXE)
         run: gradle :HMCL:build -x test --no-daemon
 
-      - name: Upload HMCL artifacts
+      - name: Upload HMCL jar
         if: success()
         uses: actions/upload-artifact@v6
         with:
-          name: HMCL-artifacts
-          path: |
-            HMCL/build/libs/*.jar
-            HMCL/build/scripts/*.bat
+          name: HMCL-fat-jar
+          path: HMCL/build/libs/*.jar
+          retention-days: 7
+
+      - name: Upload HMCL Windows launcher
+        if: success()
+        uses: actions/upload-artifact@v6
+        with:
+          name: HMCL-windows-launcher
+          path: HMCL/build/scripts/*.bat
           retention-days: 7
