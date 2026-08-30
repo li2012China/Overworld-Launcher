@@ -125,6 +125,7 @@ final class Util {
         return result;
     }
 
+    @SuppressWarnings("removal")
     static String getDescriptionFromStaticMethod(Class<?> clazz) {
         Method m;
         try {

@@ -50,6 +50,7 @@ public final class Utils {
      *
      * @param status exit code
      */
+    @SuppressWarnings("removal")
     public static void shutdownForcely(int status) throws Exception {
         AccessController.doPrivileged((PrivilegedExceptionAction<Void>) () -> {
             Class<?> z = Class.forName("java.lang.Shutdown");

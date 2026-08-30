@@ -944,6 +944,7 @@ public class BERootPaneUI extends BasicRootPaneUI {
         }
 
         @Override
+        @SuppressWarnings("removal")
         public void mouseDragged(MouseEvent ev) {
             Window w = (Window) ev.getSource();
             Point pt = ev.getPoint();

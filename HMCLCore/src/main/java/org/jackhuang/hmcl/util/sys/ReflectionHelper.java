@@ -38,6 +38,7 @@ public class ReflectionHelper {
         try {
             unsafe = AccessController.doPrivileged(new PrivilegedExceptionAction<Unsafe> () {
                 @Override
+    @SuppressWarnings("removal")
                 public Unsafe run() throws Exception {
                     Field theUnsafe = Unsafe.class.getDeclaredField("theUnsafe");
                     theUnsafe.setAccessible(true);
