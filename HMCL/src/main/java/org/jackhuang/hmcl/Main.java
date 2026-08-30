@@ -79,7 +79,7 @@ public final class Main {
     };
     private static final HostnameVerifier HNV = (hostname, session) -> true;
 
-    public static final String LAUNCHER_NAME = "Hello Minecraft! Launcher";
+    public static final String LAUNCHER_NAME = "Overworld Launcher";
     public static final String LAUNCHER_VERSION = "@HELLO_MINECRAFT_LAUNCHER_VERSION_FOR_GRADLE_REPLACING@";
     public static final int MINIMUM_LAUNCHER_VERSION = 16;
 
@@ -93,7 +93,7 @@ public final class Main {
     }
 
     public static String shortTitle() {
-        return "HMCL" + ' ' + LAUNCHER_VERSION;
+        return "Overworld Launcher" + ' ' + LAUNCHER_VERSION;
     }
 
     public static final Logger LOGGER = Logger.getLogger(Main.class.getName());
@@ -101,7 +101,7 @@ public final class Main {
     public static void main(String[] args) throws IOException {
         {
             if (new File("").getAbsolutePath().contains("!")) {
-                MessageBox.show("HMCL cannot run at such path that contains '!'");
+                MessageBox.show("Overworld Launcher cannot run at such path that contains '!'");
                 return;
             }
             
@@ -114,7 +114,7 @@ public final class Main {
                 LOGGER.log(Level.SEVERE, "Failed to add log appender File because an error occurred while creating or opening hmcl.log", ex);
             }
             
-            org.jackhuang.hmcl.util.log.logger.Logger logger = new org.jackhuang.hmcl.util.log.logger.Logger("HMCL");
+            org.jackhuang.hmcl.util.log.logger.Logger logger = new org.jackhuang.hmcl.util.log.logger.Logger("Overworld Launcher");
             HMCLog.LOGGER = new ILogger() {
                 @Override
                 public void log(String msg) {
@@ -154,8 +154,8 @@ public final class Main {
                         HMCLog.warn("Class: " + c + " not found, please add your plugin jar to class path.", ex);
                     }
                 } else if (s.startsWith("--help")) {
-                    System.out.println("HMCL command line help");
-                    System.out.println("--noupdate: this arg will prevent HMCL from initializing the newest app version in %appdata%/.hmcl");
+                    System.out.println("Overworld Launcher command line help");
+                    System.out.println("--noupdate: this arg will prevent Overworld Launcher from initializing the newest app version in %appdata%/.hmcl");
                     System.out.println("--plugin=<your plugin class>: this arg will allow a new plugin to be loaded, please keep your jar in system class path and this class extends IPlugin.");
                     return;
                 }

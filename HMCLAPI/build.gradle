@@ -1,5 +1,5 @@
 /*
- * Hello Minecraft! Launcher - HMCLAPI module
+ * Overworld Launcher - HMCLAPI module
  */
 plugins {
     id 'java'

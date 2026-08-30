@@ -33,30 +33,30 @@ jobs:
 
       - name: Build EXE with jpackage
         run: |
-          JAR=$(ls HMCL/build/libs/*.jar | head -1)
+          JAR=$(ls Overworld-Launcher/build/libs/*.jar | head -1)
           jpackage \
             --input "$(dirname $JAR)" \
             --main-jar "$(basename $JAR)" \
-            --name HMCL \
-            --dest HMCL/build/libs \
+            --name Overworld-Launcher \
+            --dest Overworld-Launcher/build/libs \
             --java-options "-Xms256m" \
             --java-options "-Xmx1024m" \
             --app-version "${{ github.run_number }}" \
-            --vendor "Hello Minecraft" \
-            --description "Hello Minecraft! Launcher"
+            --vendor "Overworld Launcher" \
+            --description "Overworld Launcher"
 
       - name: Upload HMCL jar
         if: success()
         uses: actions/upload-artifact@v6
         with:
-          name: HMCL-fat-jar
-          path: HMCL/build/libs/*.jar
+          name: Overworld-Launcher-fat-jar
+          path: Overworld-Launcher/build/libs/*.jar
           retention-days: 7
 
       - name: Upload HMCL EXE
         if: success()
         uses: actions/upload-artifact@v6
         with:
-          name: HMCL-windows-exe
-          path: HMCL/build/libs/HMCL
+          name: Overworld-Launcher-windows-exe
+          path: Overworld-Launcher/build/libs/HMCL
           retention-days: 7

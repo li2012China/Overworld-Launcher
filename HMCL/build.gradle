@@ -1,5 +1,5 @@
 /*
- * Hello Minecraft! Launcher - Main module build.gradle
+ * Overworld Launcher - Main module build.gradle
  * Minimal version for compile test (Gradle 8.5 + Java 21)
  * Full build config kept in build.gradle.full
  */
@@ -34,7 +34,7 @@ dependencies {
 }
 
 jar {
-    archiveBaseName = 'HMCL'
+    archiveBaseName = 'Overworld-Launcher'
     from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
 
     manifest {

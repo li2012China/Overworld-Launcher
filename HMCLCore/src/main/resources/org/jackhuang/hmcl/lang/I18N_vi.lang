@@ -1,4 +1,4 @@
-# Hello Minecraft! Launcher.
+# Overworld Launcher.
 # Copyright (C) 2013  huangyuhui <huanghongxun2008@126.com>
 # 
 # This program is free software: you can redistribute it and/or modify
@@ -127,7 +127,7 @@ crash.advice.no=Không có lời khuyên.
 
 crash.user_fault=Hệ điều hành hoặc java của bạn có thể đã cài đặt không đúng cách dẫn đến sự crash của launcher, hãy cài lại java và xem lại máy tính của bạn!
 crash.headless=Nếu hệ điều hành của bạn là Linux, hãy dùng Oracle JDK thay cho OpenJDK, hoặc thêm vào "-Djava.awt.headless=false" vào argument của máy ảo java, hoặc xem nếu Xserver có hoạt động hay không
-crash.NoClassDefFound=Hãy kiểm tra phần mềm "HMCL" đã hoàn thành
+crash.NoClassDefFound=Hãy kiểm tra phần mềm "Overworld Launcher" đã hoàn thành
 
 crash.error=Minecraft đã bị crash.
 crash.main_class_not_found=Class chính của minecraft không tìm thấy, có lẽ phiên bản minecraft đã bị lỗi.
@@ -173,8 +173,8 @@ ui.message.sure_remove=Bạn có chắc chắn xóa cấu hình %s không?
 ui.message.update_java=Hãy cập nhật phiên bản java của bạn.
 
 ui.label.settings=Cài đặt
-ui.label.crashing=<html>HMCL Minecraft Launcher đã bị crash!</html>
-ui.label.crashing_out_dated=<html>HL Minecraft Launcher đã bị crash! Và launcher của bạn không phải là phiên bản mới nhất. cập nhật nó đi!</html>
+ui.label.crashing=<html>Overworld Launcher đã bị crash!</html>
+ui.label.crashing_out_dated=<html>Overworld Launcher đã bị crash! Và launcher của bạn không phải là phiên bản mới nhất. cập nhật nó đi!</html>
 ui.label.failed_set=Failed to set: 
 ui.message.open_jdk=We have found that you started this application using OpenJDK, which will cause so many troubles drawing the UI. We suggest you using Oracle JDK instead.
 
