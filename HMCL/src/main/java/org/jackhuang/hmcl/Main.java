@@ -46,7 +46,6 @@ import org.jackhuang.hmcl.core.MCUtils;
 import org.jackhuang.hmcl.setting.Settings;
 import org.jackhuang.hmcl.ui.LogWindow;
 import org.jackhuang.hmcl.ui.MainFrame;
-import org.jackhuang.hmcl.util.CrashReporter;
 import org.jackhuang.hmcl.util.DefaultPlugin;
 import org.jackhuang.hmcl.util.ui.MessageBox;
 import org.jackhuang.hmcl.util.StrUtils;
@@ -178,7 +177,6 @@ public final class Main {
             }
             HttpsURLConnection.setDefaultHostnameVerifier(HNV);
 
-            Thread.setDefaultUncaughtExceptionHandler(new CrashReporter(true));
 
             HMCLog.log("*** " + Main.makeTitle() + " ***");
 
