@@ -25,6 +25,7 @@ import org.jackhuang.hmcl.util.C;
 import org.jackhuang.hmcl.api.HMCLog;
 import org.jackhuang.hmcl.api.ui.Theme;
 import org.jackhuang.hmcl.setting.Settings;
+import org.jackhuang.hmcl.core.download.DownloadSourceManager;
 import org.jackhuang.hmcl.core.download.DownloadType;
 import org.jackhuang.hmcl.util.MathUtils;
 import org.jackhuang.hmcl.util.sys.IOUtils;
@@ -79,6 +80,12 @@ public class LauncherSettingsPanel extends RepaintPage {
         spinnerFontSize.setValue(Settings.getInstance().getFontSize());
         cboFontFamily.setSelectedItem(Settings.getInstance().getFontFamily());
         cboDownloadSource.setSelectedIndex(Settings.getInstance().getDownloadType());
+
+        DefaultComboBoxModel<String> m = new DefaultComboBoxModel<>();
+        for (DownloadSourceManager.SourceMode mode : DownloadSourceManager.SourceMode.values())
+            m.addElement(mode.getDisplayName());
+        cboSourceMode.setModel(m);
+        cboSourceMode.setSelectedIndex(Settings.getInstance().getSourceMode());
         initDownloadSpeedSlider();
         cboProxyType.setSelectedIndex(Settings.getInstance().getProxyType().ordinal());
         cboTheme.setSelectedItem(Settings.getInstance().getTheme());
@@ -117,7 +124,9 @@ public class LauncherSettingsPanel extends RepaintPage {
         lblProxyPassword = new javax.swing.JLabel();
         txtProxyPassword = new javax.swing.JTextField();
         cboDownloadSource = new javax.swing.JComboBox();
+        cboSourceMode = new javax.swing.JComboBox();
         lblDownloadSource = new javax.swing.JLabel();
+        lblSourceMode = new javax.swing.JLabel();
         lblDownloadSpeed = new javax.swing.JLabel();
         sldDownloadSpeed = new javax.swing.JSlider();
         lblDownloadSpeedValue = new javax.swing.JLabel();
@@ -193,6 +202,11 @@ public class LauncherSettingsPanel extends RepaintPage {
         cboDownloadSource.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cboDownloadSourceItemStateChanged(evt);
+            }
+        });
+        cboSourceMode.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboSourceModeItemStateChanged(evt);
             }
         });
 
@@ -554,6 +568,11 @@ public class LauncherSettingsPanel extends RepaintPage {
         Settings.getInstance().setDownloadType(cboDownloadSource.getSelectedIndex());
     }//GEN-LAST:event_cboDownloadSourceItemStateChanged
 
+    private void cboSourceModeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboSourceModeItemStateChanged
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED)
+            Settings.getInstance().setSourceMode(cboSourceMode.getSelectedIndex());
+    }//GEN-LAST:event_cboSourceModeItemStateChanged
+
     private void btnSelBackgroundPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelBackgroundPathActionPerformed
         JSystemFileChooser fc = new JSystemFileChooser();
         fc.setFileSelectionMode(JSystemFileChooser.FILES_ONLY);
@@ -674,6 +693,7 @@ public class LauncherSettingsPanel extends RepaintPage {
     private javax.swing.JButton btnSelBackgroundPath;
     private javax.swing.JButton btnSetCommonPath;
     private javax.swing.JComboBox cboDownloadSource;
+    private javax.swing.JComboBox cboSourceMode;
     private javax.swing.JComboBox cboFontFamily;
     private javax.swing.JComboBox cboLang;
     private javax.swing.JComboBox<String> cboProxyType;
@@ -686,6 +706,7 @@ public class LauncherSettingsPanel extends RepaintPage {
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblCommonPath;
     private javax.swing.JLabel lblDownloadSource;
+    private javax.swing.JLabel lblSourceMode;
     private javax.swing.JLabel lblDownloadSpeed;
     private javax.swing.JLabel lblDownloadSpeedValue;
     private javax.swing.JSlider sldDownloadSpeed;
