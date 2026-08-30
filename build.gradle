@@ -45,6 +45,8 @@ subprojects { sub ->
                 implementation project(':HMCLaF')
                 implementation project(':HMCLAPI')
                 implementation project(':HMCLCore')
+                implementation 'com.google.code.gson:gson:2.2.4'
+                implementation 'org.commonjava.googlecode.markdown4j:markdown4j:2.2-cj-1.0'
             }
         }
     }
