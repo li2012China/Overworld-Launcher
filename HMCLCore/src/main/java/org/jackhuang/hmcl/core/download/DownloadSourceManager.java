@@ -214,6 +214,15 @@ public final class DownloadSourceManager {
             return code;
         }
 
+        public String getDisplayName() {
+            switch (this) {
+                case CHINA:         return "China / Auto (BMCLAPI优先)";
+                case INTERNATIONAL: return "International (Mojang优先)";
+                case FASTEST:       return "速度优先 (自动测速)";
+                default:            return name();
+            }
+        }
+
         public static SourceMode fromCode(int code) {
             for (SourceMode mode : values()) {
                 if (mode.code == code) return mode;
