@@ -35,5 +35,5 @@ jobs:
           name: HMCL-artifacts
           path: |
             HMCL/build/libs/*.jar
-            HMCL/build/libs/*.exe
+            HMCL/build/scripts/*.bat
           retention-days: 7

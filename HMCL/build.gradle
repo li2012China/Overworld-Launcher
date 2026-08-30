@@ -8,7 +8,7 @@ import java.security.MessageDigest
 
 plugins {
     id 'java'
-    id 'edu.bsu.zipflyer.launch4j' version '0.0.5'
+    id 'application'
 }
 
 if (!hasProperty('mainClass')) {
@@ -35,7 +35,6 @@ dependencies {
 }
 
 jar {
-    archiveBaseName = 'HMCL-' + version
     from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
 
     manifest {
@@ -46,14 +45,7 @@ jar {
     }
 }
 
-launch4j {
+application {
     mainClass = 'org.jackhuang.hmcl.Main'
-    version = project.version
-    companyName = 'Hello Minecraft'
-    productName = 'HMCL'
-    outfile = 'HMCL-' + version + '.exe'
-    minVersion = '1.8.0'
-    jdkVersion = '21'
-    requireJDK = false
-    vmArgs = ['-Xms256m', '-Xmx1024m']
+    applicationName = 'HMCL'
 }
