@@ -25,8 +25,25 @@ jobs:
           unzip -q /tmp/gradle.zip -d /opt
           echo "/opt/gradle-8.5/bin" >> $GITHUB_PATH
 
-      - name: Build (JAR + EXE)
+      - name: Build HMCL JAR
         run: gradle :HMCL:build -x test --no-daemon
+
+      - name: Build EXE with launch4j
+        run: |
+          curl -sL https://github.com/nicstrong/launch4j-mirror/releases/download/v2.0.3/launch4j.zip -o /tmp/launch4j.zip
+          unzip -q /tmp/launch4j.zip -d /opt/launch4j
+          JAR=$(ls HMCL/build/libs/*.jar | head -1)
+          java -jar /opt/launch4j/launch4j.jar \
+            --input "$JAR" \
+            --outputExe "HMCL/build/libs/HMCL.exe" \
+            --fileDescription "Hello Minecraft! Launcher" \
+            --productName "HMCL" \
+            --companyName "Hello Minecraft" \
+            --jreMinVersion "1.8" \
+            --jreMaxVersion "21" \
+            --heapSize=256 \
+            --maxHeapSize=1024 \
+            --stayAlive
 
       - name: Upload HMCL jar
         if: success()
@@ -36,10 +53,10 @@ jobs:
           path: HMCL/build/libs/*.jar
           retention-days: 7
 
-      - name: Upload HMCL Windows launcher
+      - name: Upload HMCL EXE
         if: success()
         uses: actions/upload-artifact@v6
         with:
-          name: HMCL-windows-launcher
-          path: HMCL/build/scripts/*.bat
+          name: HMCL-windows-exe
+          path: HMCL/build/libs/*.exe
           retention-days: 7

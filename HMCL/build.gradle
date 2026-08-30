@@ -8,7 +8,6 @@ import java.security.MessageDigest
 
 plugins {
     id 'java'
-    id 'application'
 }
 
 if (!hasProperty('mainClass')) {
@@ -45,7 +44,3 @@ jar {
     }
 }
 
-application {
-    mainClass = 'org.jackhuang.hmcl.Main'
-    applicationName = 'HMCL'
-}
