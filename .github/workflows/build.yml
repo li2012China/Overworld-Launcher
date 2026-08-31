@@ -36,7 +36,8 @@ jobs:
 
       - name: Build EXE with jpackage
         run: |
-          JAR=$(ls HMCL/HMCL/build/libs/*.jar | head -1)
+          JAR=$(find . -path '*/build/libs/*.jar' -type f | head -1)
+          echo "Found JAR: $JAR"
           jpackage \
             --input "$(dirname $JAR)" \
             --main-jar "$(basename $JAR)" \
@@ -53,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: Overworld-Launcher-fat-jar
-          path: HMCL/HMCL/build/libs/*.jar
+          path: HMCL/build/libs/*.jar
           retention-days: 7
 
       - name: Upload HMCL EXE
@@ -68,7 +69,7 @@ jobs:
         if: success()
         run: |
           mkdir -p Releases/run-${{ github.run_number }}
-          cp HMCL/HMCL/build/libs/*.jar Releases/run-${{ github.run_number }}/
+          find . -name '*.jar' -path '*/build/libs/*' -type f | while read jar; do cp "$jar" Releases/run-${{ github.run_number }}/; done
           cp Overworld-Launcher/build/libs/*.exe Releases/run-${{ github.run_number }}/ 2>/dev/null || true
           git add Releases/
           git config user.name "github-actions[bot]"
