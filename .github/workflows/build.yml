@@ -29,28 +29,15 @@ jobs:
           unzip -q /tmp/gradle.zip -d /opt
           echo "/opt/gradle-8.5/bin" >> $GITHUB_PATH
 
-      - name: Install Wine for jpackage
-        run: sudo apt-get update && sudo apt-get install -y wine64
-
       - name: Build JAR
         run: gradle :HMCL:build -x test --no-daemon
 
-      - name: Build EXE with jpackage
+      - name: Find JAR
+        id: jar
         run: |
-          JAR=$(find . -path '*/build/libs/*.jar' -type f | head -1)
+          JAR=$(find . -path '*/HMCL/build/libs/*.jar' -type f | head -1)
           echo "Found JAR: $JAR"
-          JDK_HOME=$(dirname $(dirname $(which java)))
-          jpackage \
-            --type app-image \
-            --input "$(dirname $JAR)" \
-            --main-jar "$(basename $JAR)" \
-            --name Overworld-Launcher \
-            --dest ./output \
-            --java-options "-Xms256m" \
-            --java-options "-Xmx1024m" \
-            --app-version "${{ github.run_number }}" \
-            --vendor "Hello Minecraft" \
-            --description "Hello Minecraft! Launcher"
+          echo "jar_path=$JAR" >> $GITHUB_OUTPUT
 
       - name: Upload JAR
         if: success()
@@ -60,23 +47,14 @@ jobs:
           path: HMCL/build/libs/*.jar
           retention-days: 7
 
-      - name: Upload EXE
-        if: success()
-        uses: actions/upload-artifact@v6
-        with:
-          name: Overworld-Launcher-windows-exe
-          path: ./output/Overworld-Launcher/*
-          retention-days: 7
-
-      - name: Commit artifacts to Releases
+      - name: Commit artifact to Releases
         if: success()
         run: |
           RELEASE_DIR="Releases/run-${{ github.run_number }}"
           mkdir -p "$RELEASE_DIR"
           cp HMCL/build/libs/*.jar "$RELEASE_DIR/"
-          cp -r ./output/Overworld-Launcher/* "$RELEASE_DIR/" 2>/dev/null || true
           git add Releases/
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "ci: build artifacts for run #${{ github.run_number }}"
+          git commit -m "ci: build artifact for run #${{ github.run_number }}"
           git push
