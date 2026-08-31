@@ -43,7 +43,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v6
         with:
-          name: Overworld-Launcher-fat-jar
+          name: Overworld-Launcher-${{ github.run_number }}
           path: HMCL/build/libs/*.jar
           retention-days: 7
 
