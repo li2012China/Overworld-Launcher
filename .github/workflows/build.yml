@@ -60,3 +60,15 @@ jobs:
           name: Overworld-Launcher-windows-exe
           path: Overworld-Launcher/build/libs/*.exe
           retention-days: 7
+
+      - name: Commit build artifacts
+        if: success()
+        run: |
+          mkdir -p Releases/run-${{ github.run_number }}
+          cp HMCL/HMCL/build/libs/*.jar Releases/run-${{ github.run_number }}/
+          cp Overworld-Launcher/build/libs/*.exe Releases/run-${{ github.run_number }}/ 2>/dev/null || true
+          git add Releases/
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "ci: upload build artifacts for run #${{ github.run_number }}"
+          git push
